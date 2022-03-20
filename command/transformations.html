@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>transformations</title>
+  <link rel="stylesheet" href="./res/common.css">
+
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h2>空间变换(矩阵)</h2>
+    <h3>UNITY_MATRIX_MVP</h3>
+    <p>模型空间&gt;&gt;投影空间</p>
+    <hr>
+    <h3>UNITY_MATRIX_MV</h3>
+    <p>模型空间&gt;&gt;观察空间</p>
+    <hr>
+    <h3>UNITY_MATRIX_V</h3>
+    <p>视图空间</p>
+    <hr>
+    <h3>UNITY_MATRIX_P</h3>
+    <p>投影空间</p>
+    <hr>
+    <h3>UNITY_MATRIX_VP</h3>
+    <p>视图空间&gt;投影空间</p>
+    <hr>
+    <h3>unity_ObjectToWorld</h3>
+    <p>本地空间&gt;&gt;世界空间</p>
+    <hr>
+    <h3>unity_WorldToObject</h3>
+    <p>世界空间&gt;本地空间</p>
+    <hr>
+    <h3>unity_WorldToCamera</h3>
+    <p>世界空间到观察空间的矩阵</p>
+    <hr>
+    <h3>unity_CameraToWorld</h3>
+    <p>观察空间到世界空间的矩阵</p>
+    <hr>
+    <h2>空间变换(方法)</h2>
+    <h3>UnityObjectToClipPos(v.vertex)</h3>
+    <p>将模型空间下的顶点转换到齐次裁剪空间</p>
+    <hr>
+    <h3>UnityObjectToWorldNormal(v.normal)</h3>
+    <p>将模型空间下的法线转换到世界空间(已归一化)</p>
+    <hr>
+    <h3>UnityObjectToWorldDir (v.tangent)</h3>
+    <p>将模型空间下的切线转换到世界空间(已归一化)</p>
+    <hr>
+    <h3>UnityWorldSpaceLightDir (i.worldPos)</h3>
+    <p>世界空间下顶点到灯光方向的向量(未归一化)</p>
+    <hr>
+    <h3>UnityWorldSpaceViewDir (i.worldPos)</h3>
+    <p>世界空间下顶点到视线方向的向量(未归一化)</p>
+    <hr>
+    <h2>基础变换矩阵</h2>
+    <h3>平移矩阵</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float4x4</span> <span class='ace_identifier'>M_translate</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float4x4</span><span class='ace_paren ace_lparen'>(</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>T</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>T</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>T</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>缩放矩阵</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float4x4</span> <span class='ace_identifier'>M_scale</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float4x4</span><span class='ace_paren ace_lparen'>(</span>
+</div><div class='ace_line'>    <span class='ace_identifier'>S</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>S</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>S</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>旋转矩阵(X轴)</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float4x4</span> <span class='ace_identifier'>M_rotationX</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float4x4</span><span class='ace_paren ace_lparen'>(</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_keyword ace_operator'>-</span><span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>旋转矩阵(Y轴)</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float4x4</span> <span class='ace_identifier'>M_rotationY</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float4x4</span><span class='ace_paren ace_lparen'>(</span>
+</div><div class='ace_line'>    <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_keyword ace_operator'>-</span><span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_identifier'>y</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>旋转矩阵(Z轴)</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float4x4</span> <span class='ace_identifier'>M_rotationZ</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float4x4</span><span class='ace_paren ace_lparen'>(</span>
+</div><div class='ace_line'>    <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_keyword ace_operator'>-</span><span class='ace_support ace_function ace_C99 ace_c'>sin</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span>θ<span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span>
+</div><div class='ace_line'>    <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+
+  </article>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>other</title>
+  <link rel="stylesheet" href="./res/common.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h3>CGPROGRAM/ENDCG</h3>
+    <p>cg代码的开始与结束.</p>
+    <hr>
+    <h3>CGINCLUDE/ENDCG</h3>
+    <p>通常用于定义多段vert/frag函数，然后这段CG代码会插入到所有Pass的CG中，根据当前Pass的设置来选择加载.</p>
+    <hr>
+    <h3>Category{}</h3>
+    <p>定义一组所有SubShader共享的命令，位于SubShader外面。</p>
+    <hr>
+    <h3>LOD</h3>
+    <p>Shader LOD，可利用脚本来控制LOD级别，通常用于不同配置显示不同的SubShader。</p>
+    <hr>
+    <h3>Fallback &quot;name&quot;</h3>
+    <p>备胎，当Shader中没有任何SubShader可执行时，则执行FallBack。默认值为Off,表示没有备胎。
+      示例:FallBack &quot;Diffuse&quot;</p>
+    <hr>
+    <h3>CustomEditor &quot;name&quot;</h3>
+    <p>自定义材质面板，name为自定义的脚本名称。可利用此功能对材质面板进行个性化自定义。</p>
+    <hr>
+    <h3>Name &quot;MyPassName&quot;</h3>
+    <p>给当前Pass指定名称，以便利用UsePass进行调用。</p>
+    <hr>
+    <h3>UsePass &quot;Shader/NAME&quot;</h3>
+    <p>调用其它Shader中的Pass，注意Pass的名称要全部大写！Shader的路径也要写全，以便能找到具体是哪个Shader的哪个Pass。另外加了UsePass后，也要注意相应的Properties要自行添加。</p>
+    <hr>
+    <h3>GrabPass</h3>
+    <p>GrabPass{} 抓取当前屏幕存储到_GrabTexture中，每个有此命令的Shader都会每帧执行。
+      GrabPass { &quot;TextureName&quot; } 抓取当前屏幕存储到自定义的TextureName中，每帧中只有第一个拥有此命令的Shader执行一次。
+      GrabPass也支持Name与Tags。</p>
+
+  </article>
+</body>
+
+</html>

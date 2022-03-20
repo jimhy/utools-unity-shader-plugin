@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>semantics</title>
+  <link rel="stylesheet" href="./res/common.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h2>应用程序到顶点着色器的数据(appdata)</h2>
+    <h3>float4 vertex : POSITION;</h3>
+    <p>顶点的本地坐标</p>
+    <hr>
+    <h3>uint vid : SV_VertexID;</h3>
+    <p>顶点的索引ID</p>
+    <hr>
+    <h3>float3 normal : NORMAL;</h3>
+    <p>顶点的法线信息</p>
+    <hr>
+    <h3>float4 tangent : TANGENT;</h3>
+    <p>顶点的切线信息</p>
+    <hr>
+    <h3>float4 texcoord : TEXCOORD0;</h3>
+    <p>顶点的UV1信息</p>
+    <hr>
+    <h3>float4 texcoord1 : TEXCOORD1;</h3>
+    <p>顶点的UV2信息</p>
+    <hr>
+    <h3>float4 texcoord2 : TEXCOORD2;</h3>
+    <p>顶点的UV3信息</p>
+    <hr>
+    <h3>float4 texcoord3 : TEXCOORD3;</h3>
+    <p>顶点的UV4信息</p>
+    <hr>
+    <h3>fixed4 color : COLOR;</h3>
+    <p>顶点的顶点色信息</p>
+    <hr>
+    <h2>顶点着色器到片段着色器的数据(v2f)</h2>
+    <h3>float4 pos:SV_POSITION;</h3>
+    <p>顶点的齐次裁剪空间下的坐标,默认情况下用POSITION也可以(PS4下不支持)，但是为了支持所有平台，所以最好使用SV_POSITION.</p>
+    <hr>
+    <h3>TEXCOORD0~N</h3>
+    <p>例如TEXCOORD0、TEXCOORD1、TEXCOORD2...等等，主要用于高精度数据</p>
+    <hr>
+    <h3>COLOR0~N</h3>
+    <p>例如COLOR0、COLOR1、COLOR2...等等，主要用于低精度数据</p>
+    <hr>
+    <h3>float face:VFACE</h3>
+    <p>如果渲染表面朝向摄像机，则Face节点输出正值1，如果远离摄像机，则输出负值-1</p>
+    <hr>
+    <h3>UNITY_VPOS_TYPE screenPos : VPOS</h3>
+    <ol>
+      <li>当前片断在屏幕上的位置(单位是像素,可除以_ScreenParams.xy来做归一化),此功能仅支持#pragma target 3.0及以上编译指令</li>
+      <li>大部分平台下VPOS返回的是一个四维向量，部分平台是二维向量，所以需要用UNITY_VPOS_TYPE来统一区分.</li>
+      <li>在使用VPOS时，就不能在v2f中定义SV_POSITION，这样会冲突，所以需要把顶点着色器的输入放在()的参数中，并且SV_POSITION添加out.</li>
+    </ol>
+    <hr>
+    <h3>uint vid : SV_VertexID</h3>
+    <p>顶点着色器可以接收具有“顶点编号”作为无符号整数的变量,当需要从纹理或ComputeBuffers中获取额外的顶点数据时比较有用，此语义仅支持#pragma target 3.5及以上</p>
+    <hr>
+    <h3>注意事项</h3>
+    <p>1.OpenGL ES2.0支持最多8个
+      2.OpenGL ES3.0支持最多16个</p>
+    <hr>
+    <h2>片段着色器输出的数据(fragOutput)</h2>
+    <h3>fixed4 color : SV_Target;</h3>
+    <p>默认RenderTarget,也是默认输出的屏幕上的颜色
+      同时支持SV_Target1、SV_Target2...等等</p>
+    <hr>
+    <h3>fixed depth : SV_Depth;</h3>
+    <p>通过在片断着色器中输出SV_DEPTH语义可以更改像素的深度值,注意此功能相对会消耗性能，在没有特别需求的情况下尽量不要用</p>
+
+  </article>
+</body>
+
+</html>

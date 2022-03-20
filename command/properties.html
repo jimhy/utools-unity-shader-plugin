@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>properties</title>
+  <link rel="stylesheet" href="./res/common.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h2>Properties</h2>
+    <h3>_Int(&quot;Int&quot;, Int) = 1</h3>
+    <p>类型:整型
+      Cg/HLSL:int
+      取决于在Cg/HLSL中是用float还是int来声明的，如果定义为float则实际使用的就是浮点数，字义为int会被识别为int类型（去小数点直接取整）</p>
+    <hr>
+    <h3>_Float (&quot;Float&quot;, Float ) = 0</h3>
+    <p>类型:浮点数值
+      Cg/HLSL:可根据需要定义不同的浮点精度
+      float 32位精度,常用于世界坐标位置以及UV坐标
+      half 范围[-6W,6W],常用于本地坐标位置，方向等
+      fixed 范围[-2,2],常用于纹理与颜色等低精度的情况</p>
+    <hr>
+    <h3>_Slider (&quot;Slider&quot;, Range(0, 1)) = 0</h3>
+    <p>类型:数值滑动条
+      本身还是Float类型，只是通过Range(min,max)来控制滑动条的最小值与最大值</p>
+    <hr>
+    <h3>_Color(&quot;Color&quot;, Color) = (1,1,1,1)</h3>
+    <p>类型:颜色属性
+      Cg/HLSL:float4/half4/fixed4</p>
+    <hr>
+    <h3>_Vector (&quot;Vector&quot;, Vector) = (0,0,0,0)</h3>
+    <p>类型:四维向量
+      在Properties中无法定义二维或者三维向量，只能定义四维向量</p>
+    <hr>
+    <h3>_MainTex (&quot;Texture&quot;, 2D) = &quot;white&quot; {}</h3>
+    <p>类型:2D纹理
+      Cg/HLSL:sampler2D/sampler2D_half/sampler2D_float
+      默认值有white、black、gray、bump以及空，空就是white</p>
+    <hr>
+    <h3>_MainTex3D (&quot;Texture&quot;, 3D) = &quot;white&quot; {}</h3>
+    <p>类型:3D纹理
+      Cg/HLSL:sampler3D/sampler3D_half/sampler3D_float</p>
+    <hr>
+    <h3>_MainCube (&quot;Texture&quot;, Cube) = &quot;white&quot; {}</h3>
+    <p>类型:立方体纹理
+      Cg/HLSL:samplerCUBE/samplerCUBE_half/samplerCUBE_float</p>
+    <hr>
+    <h2>Attributes</h2>
+    <h3>[Header(xxx)]</h3>
+    <p>用于在材质面板中当前属性的上方显示标题xxx，注意只支持英文、数字、空格以及下划线</p>
+    <hr>
+    <h3>[HideInInspector]</h3>
+    <p>在材质面板中隐藏此条属性，在不希望暴露某条属性时可以快速将其隐藏</p>
+    <hr>
+    <h3>[Space(n)]</h3>
+    <p>使材质面板属性之前有间隔，n为间隔的数值大小</p>
+    <hr>
+    <h3>[HDR]</h3>
+    <p>标记为属性为高动态范围</p>
+    <hr>
+    <h3>[PowerSlider(3)]</h3>
+    <p>滑条曲率,必须加在range属性前面，用于控制滑动的数值比例</p>
+    <hr>
+    <h3>[IntRange]</h3>
+    <p>必须使用在Range属性之上，以使在材质面板中滑动时只能生成整数</p>
+    <hr>
+    <h3>[Toggle]</h3>
+    <p>开关,加在数值类型前,可使材质面板中的数值变成开关，0是关，1是开</p>
+    <hr>
+    <h3>[Enum(Off, 0, On, 1)]</h3>
+    <p>数值枚举,可直接在cg中使用此关键字来替代数字.</p>
+    <hr>
+    <h3>[KeywordEnum (Enum0, Enum1, ..., Enum8)]</h3>
+    <p>关键字枚举,可最多定义8个,需要#pragma multi_compile _ENUM_ENUM0 _ENUM_ENUM1 ...来依次声明变体关键字.</p>
+    <hr>
+    <h3>[Enum (UnityEngine.Rendering.CullMode)]</h3>
+    <p>内置枚举,可在Enum()内直接调用Unity内部的枚举.</p>
+    <hr>
+    <h3>[NoScaleOffset]</h3>
+    <p>只能加在纹理属性前，使其隐藏材质面板中的Tiling和Offset</p>
+    <hr>
+    <h3>[Normal]</h3>
+    <p>只能加在纹理属性前，标记此纹理是用来接收法线贴图的，当用户指定了非法线的纹理时会在材质面板上进行警告提示</p>
+    <hr>
+    <h3>[Gamma]</h3>
+    <p>Float和Vector属性默认情况下不会进行颜色空间转换，可以通过添加[Gamma]来指明此属性为sRGB值</p>
+    <hr>
+    <p>[PerRendererData]</p>
+    <p>标记当前属性将以材质属性块的形式来自于每个渲染器数据</p>
+
+  </article>
+</body>
+
+</html>

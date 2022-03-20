@@ -1,0 +1,11 @@
+{
+  "preload": "preload.js",
+  "logo": "logo.png",
+  "features": [
+    {
+      "code": "unityShader",
+      "explain": "Unity Shader 命令文档速查",
+      "cmds": ["us","unityshader","shader","uinty"]
+    }
+  ]
+}

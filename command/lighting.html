@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>lighting</title>
+  <link rel="stylesheet" href="./res/common.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h2>法线 NormalMap</h2>
+    <h3>使用切线空间下的法线</h3>
+    <p>1.appdata中定义NORMAL与TANGENT语义.
+      2.v2f中声明三个变量用于组成成切线空间下的旋转矩阵.</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float3</span> <span class='ace_identifier'>tSpace0</span><span class='ace_punctuation ace_operator'>:</span><span class='ace_identifier'>TEXCOORD3</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>float3</span> <span class='ace_identifier'>tSpace1</span><span class='ace_punctuation ace_operator'>:</span><span class='ace_identifier'>TEXCOORD4</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>float3</span> <span class='ace_identifier'>tSpace2</span><span class='ace_punctuation ace_operator'>:</span><span class='ace_identifier'>TEXCOORD5</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <p>3.在顶点着色器中执行:</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>worldTangent</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>UnityObjectToWorldDir</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>v</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tangent</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>fixed</span> <span class='ace_identifier'>tangentSign</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>v</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tangent</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>unity_WorldTransformParams</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>worldBinormal</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>cross</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>worldNormal</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>worldTangent</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>tangentSign</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace0</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float3</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>worldTangent</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>worldBinormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>worldNormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace1</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float3</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>worldTangent</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>worldBinormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>worldNormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace2</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>float3</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>worldTangent</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>worldBinormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>o</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>worldNormal</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <p>4.在片断着色器中计算出世界空间下的法线,然后再拿去进行需要的计算:</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>normalTex</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>UnpackNormal</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>tex2D</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>_NormalTex</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>i</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>uv</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>worldNormal</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>half3</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>i</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace0</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>normalTex</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>i</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace1</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>normalTex</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>i</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>tSpace2</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>normalTex</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h2>光照模型</h2>
+    <h3>Lambertian</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>Diffuse</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>Ambient</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_identifier'>Kd</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>LightColor</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>max</span><span class='ace_paren ace_lparen'>(</span><span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>N</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>L</span><span class='ace_paren ace_rparen'>))</span>
+</div></div></div></code></pre>
+    <ul>
+      <li>Diffuse: 最终物体上的漫反射光强.</li>
+      <li>Ambient: 环境光强度，为了简化计算，环境光强采用一个常数表示.</li>
+      <li>Kd: 物体材质对光的反射系数.</li>
+      <li>LightColor: 光源的强度.</li>
+      <li>N: 顶点的单位法线向量.</li>
+      <li>L: 顶点指向光源的单位向量.</li>
+    </ul>
+    <hr>
+    <h3>Phong</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>Specular</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>SpecularColor</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>Ks</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_support ace_function ace_C99 ace_c'>pow</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>max</span><span class='ace_paren ace_lparen'>(</span><span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>R</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>V</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>Shininess</span><span class='ace_paren ace_rparen'>)</span>
+</div></div></div></code></pre>
+    <ul>
+      <li>Specular: 最终物体上的反射高光光强.</li>
+      <li>SpecularColor: 反射光的颜色.</li>
+      <li>Ks: 反射强度系数.</li>
+      <li>R: 反射向量，可使用2 * N * dot(N,L) - L或者reflect (-L,N)获得.</li>
+      <li>V: 观察方向.</li>
+      <li>N: 顶点的单位法线向量.</li>
+      <li>L: 顶点指向光源的单位向量.</li>
+      <li>Shininess: 乘方运算来模拟高光的变化.</li>
+    </ul>
+    <hr>
+    <h3>Blinn-Phong</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>Specular</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>SpecularColor</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>Ks</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_support ace_function ace_C99 ace_c'>pow</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>max</span><span class='ace_paren ace_lparen'>(</span><span class='ace_constant ace_numeric'>0</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>N</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>H</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>Shininess</span><span class='ace_paren ace_rparen'>)</span>
+</div></div></div></code></pre>
+    <ul>
+      <li>Specular: 最终物体上的反射高光光强.</li>
+      <li>SpecularColor: 反射光的颜色.</li>
+      <li>Ks: 反射强度系数.</li>
+      <li>N: 顶点的单位法线向量.</li>
+      <li>H: 入射光线L与视线V的中间向量，也称为半角向量H = normalize(L+V).</li>
+      <li>Shininess: 乘方运算来模拟高光的变化.</li>
+    </ul>
+    <hr>
+    <h3>Disney Principled BRDF</h3>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>f</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>l</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>v</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>diffuse</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_identifier'>D</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>h</span><span class='ace_paren ace_rparen'>)</span><span class='ace_identifier'>F</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>v</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>h</span><span class='ace_paren ace_rparen'>)</span><span class='ace_identifier'>G</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>l</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>v</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_identifier'>h</span><span class='ace_paren ace_rparen'>)</span><span class='ace_keyword ace_operator'>/</span>4<span class='ace_identifier'>cos</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>n</span>·<span class='ace_identifier'>l</span><span class='ace_paren ace_rparen'>)</span><span class='ace_support ace_function ace_C99 ace_c'>cos</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>n</span>·<span class='ace_identifier'>v</span><span class='ace_paren ace_rparen'>)</span>
+</div></div></div></code></pre>
+    <ul>
+      <li>f(l,v): 双向反射分布函数的最终值,l表示光的方向,v表示视线的方向.</li>
+      <li>diffuse: 漫反射.</li>
+      <li>D(h): 法线分布函数(Normal Distribution Function),描述微面元法线分布的概率,即朝向正确的法线浓度.h为半角向量,表示光的方向与反射方向的半角向量,只有物体的微表面法向m =
+        h时,才会反射到视线中.</li>
+      <li>D(h) = roughness^2 / π((n·h)^2(roughness^2-1)+1)^2</li>
+      <li>F(v,h): 菲涅尔方程(Fresnel Equation),描述不同的表面角下表面所反射的光线所占的比率.</li>
+      <li>F(v,h) = F0 + (1-F0)(1-(v·h))^5(F0是0度入射角的菲涅尔反射值)</li>
+      <li>G(l,v,h): 几何函数(Geometry Function),描述微平面自成阴影的属性,即微表面法向m = h的并未被遮蔽的表面点的百分比.</li>
+      <li>4cos(n·l)cos(n·v): 校正因子(correctionfactor)作为微观几何的局部空间和整个宏观表面的局部空间之间变换的微平面量的校正.</li>
+    </ul>
+    <hr>
+    <h2>ShadowMap 阴影</h2>
+    <h3>生成阴影</h3>
+    <p>添加&quot;LightMode&quot; = &quot;ShadowCaster&quot;的Pass.</p>
+    <ol>
+      <li>appdata中声明float4 vertex:POSITION;和half3 normal:NORMAL;这是生成阴影所需要的语义.</li>
+      <li>v2f中添加V2F_SHADOW_CASTER;用于声明需要传送到片断的数据.</li>
+      <li>在顶点着色器中添加TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)，主要是计算阴影的偏移以解决不正确的Shadow Acne和Peter Panning现象.</li>
+      <li>在片断着色器中添加SHADOW_CASTER_FRAGMENT(i)</li>
+    </ol>
+    <hr>
+    <h3>采样阴影</h3>
+    <ol>
+      <li>在v2f中添加UNITY_SHADOW_COORDS(idx),unity会自动声明一个叫_ShadowCoord的float4变量，用作阴影的采样坐标.</li>
+      <li>在顶点着色器中添加TRANSFER_SHADOW(o)，用于将上面定义的_ShadowCoord纹理采样坐标变换到相应的屏幕空间纹理坐标，为采样阴影纹理使用.</li>
+      <li>在片断着色器中添加UNITY_LIGHT_ATTENUATION(atten, i, i.worldPos)，其中atten即存储了采样后的阴影.</li>
+    </ol>
+    <hr>
+    <h2>Global IIIumination 全局照明GI</h2>
+    <h3>产生间接光照</h3>
+    <p>添加&quot;LightMode&quot; = &quot;Meta&quot;的Pass.
+      可参考内置Shader中的Meta Pass.</p>
+    <h2>Light Probe 光照探针</h2>
+    <h3>规则01</h3>
+    <p>当逐像素平行灯标记为Mixed时,同时场景内有LightProbe时,那么当前平行灯的光照值会自动被LightProbe影响,所以不管物体Shader中是否有SH相关的运算,都会受到LightProbe的影响.</p>
+    <hr>
+    <h3>规则02</h3>
+    <p>当逐像素平行灯标记为Baked时,同时场景内有LightProbe时,那么需要自行在物体Shader中添加SH相关的运算,才会受到LightProbe的影响.</p>
+    <hr>
+    <h2>Reflection Probe 反射探针</h2>
+    <h3>反射探针的采样</h3>
+    <p>反射探针中当前激活的CubeMap存储在unity_SpecCube0当中，必须要用UNITY_SAMPLE_TEXCUBE进行采样，然后需要对其进行解码</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>worldView</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>normalize</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>UnityWorldSpaceViewDir</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>i</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>worldPos</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>R</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>reflect</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>worldView</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>N</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>half4</span> <span class='ace_identifier'>cubemap</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>UNITY_SAMPLE_TEXCUBE</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>unity_SpecCube0</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>R</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div><div class='ace_line'><span class='ace_identifier'>half3</span> <span class='ace_identifier'>skyColor</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>DecodeHDR</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>cubemap</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>unity_SpecCube0_HDR</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
+</div></div></div></code></pre>
+    <hr>
+    <h2>Fog 雾效</h2>
+    <h3>unity_FogColor</h3>
+    <p>内置雾效颜色值</p>
+    <hr>
+    <h3>方案一:</h3>
+    <p>常规方案</p>
+    <ol>
+      <li>#pragma multi_compile_fog声明雾效所需要的内置变体:FOG_LINEAR FOG_EXP FOG_EXP2.</li>
+      <li>UNITY_FOG_COORDS(idx): 声明顶点传入片断中的雾效插值器(fogCoord).</li>
+      <li>UNITY_TRANSFER_FOG(o,o.vertex): 在顶点着色器中计算雾效采样.</li>
+      <li>UNITY_APPLY_FOG(i.fogCoord, col): 在片断着色器中进行雾效颜色混合.</li>
+    </ol>
+    <hr>
+    <h3>方案二:</h3>
+    <p>当在v2f中有定义worldPos时,可以把worldPos.w利用起来做为雾效值.</p>
+    <ol>
+      <li>#pragma multi_compile_fog声明雾效所需要的内置变体:FOG_LINEAR FOG_EXP FOG_EXP2.</li>
+      <li>UNITY_TRANSFER_FOG_COMBINED_WITH_WORLD_POS(o,o.worldPos): 在顶点着色器中添加，o.worldPos表示世界空间下的顶点坐标.</li>
+      <li>UNITY_EXTRACT_FOG_FROM_WORLD_POS(i): 在片断着色器中添加.</li>
+      <li>UNITY_APPLY_FOG(_unity_fogCoord, c): 在片断着色器中进行雾效颜色混合.</li>
+    </ol>
+
+  </article>
+</body>
+
+</html>

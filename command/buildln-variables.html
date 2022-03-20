@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>buildln-variables</title>
+  <link rel="stylesheet" href="./res/common.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h3>UNITY_INITIALIZE_OUTPUT(type,name)</h3>
+    <p>由于HLSL编缉器不接受没有初始化的数据，所以为了支持所有平台，从而需要使用此方法进行初始化.</p>
+    <hr>
+    <h3>TRANSFORM_TEX(i.uv,_MainTex)</h3>
+    <p>对UV进行Tiling与Offset变换</p>
+    <hr>
+    <h3>float3 UnityWorldSpaceLightDir( float3 worldPos )</h3>
+    <p>返回顶点到灯光的向量</p>
+    <hr>
+    <h3>Luminance(float rgb)</h3>
+    <p>去色,内部公式为：dot(rgb,fixed3(0.22,0.707,0.071)).</p>
+    <hr>
+    <h2>Camera and Screen</h2>
+    <h3>_WorldSpaceCameraPos</h3>
+    <p>主相机的世界坐标位置，类型：float3</p>
+    <hr>
+    <h3>UnityWorldSpaceViewDir(i.worldPos)</h3>
+    <p>世界空间下的相机方向(顶点到主相机)，类型：float3</p>
+    <hr>
+    <h3>深度:_CameraDepthTexture</h3>
+    <p>1.在脚本中开启相机的深度:Camera.main.depthTextureMode = DepthTextureMode.Depth;
+      2.sampler2D_float _CameraDepthTexture;
+      3.float depth = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)));</p>
+    <hr>
+    <h3>线性深度转换</h3>
+    <p>从深度图中得到顶点的线性深度值(相机位置=0，相机远裁剪面=1)
+      Linear01Depth(depthMap, _ZBufferParams);
+      从深度图中得到顶点的线性深度值(不是0-1的范围)
+      LinearEyeDepth(depthMap, _ZBufferParams);</p>
+    <hr>
+    <h3>ComputeScreenPos(float4 pos)</h3>
+    <p>pos为裁剪空间下的坐标位置，返回的是某个投影点下的屏幕坐标位置
+      由于这个函数返回的坐标值并未除以齐次坐标，所以如果直接使用函数的返回值的话，需要使用：tex2Dproj(_ScreenTexture, uv.xyw);
+      也可以自己处理其次坐标,使用：tex2D(_ScreenTexture, uv.xy / uv.w);</p>
+    <hr>
+    <h3>_ScreenParams</h3>
+    <p>屏幕的相关参数，单位为像素。
+      x表示屏幕的宽度
+      y表示屏幕的高度
+      z表示1+1/屏幕宽度
+      w表示1+1/屏幕高度</p>
+    <hr>
+    <h2>Time</h2>
+    <h3>_Time</h3>
+    <p>时间，主要用于在Shader做动画,类型：float4</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>20</span>
+</div><div class='ace_line'><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span>
+</div><div class='ace_line'><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>*</span><span class='ace_constant ace_numeric'>2</span>
+</div><div class='ace_line'><span class='ace_identifier'>w</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>*</span><span class='ace_constant ace_numeric'>3</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>_SinTime</h3>
+    <p>t是时间的正弦值，返回值(-1~1):</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>8</span>
+</div><div class='ace_line'><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>4</span>
+</div><div class='ace_line'><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>2</span>
+</div><div class='ace_line'><span class='ace_identifier'>w</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>_CosTime</h3>
+    <p>t是时间的余弦值，返回值(-1~1):</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>8</span>
+</div><div class='ace_line'><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>4</span>
+</div><div class='ace_line'><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span><span class='ace_keyword ace_operator'>/</span><span class='ace_constant ace_numeric'>2</span>
+</div><div class='ace_line'><span class='ace_identifier'>w</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>t</span>
+</div></div></div></code></pre>
+    <hr>
+    <h3>unity_DeltaTime</h3>
+    <p>dt是时间增量,smoothDt是平滑时间</p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>dt</span>
+</div><div class='ace_line'><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_keyword ace_operator'>/</span><span class='ace_identifier'>dt</span>
+</div><div class='ace_line'><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>smoothDt</span>
+</div><div class='ace_line'><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_constant ace_numeric'>1</span><span class='ace_keyword ace_operator'>/</span><span class='ace_identifier'>smoothDt</span>
+</div></div></div></code></pre>
+    <hr>
+    <h2>Lighting(ForwardBase &amp; ForwardAdd)</h2>
+    <h3>_LightColor0</h3>
+    <p>主平行灯的颜色值,rgb = 颜色x亮度; a = 亮度</p>
+    <hr>
+    <h3>_WorldSpaceLightPos0</h3>
+    <p>平行灯: (xyz=位置,z=0))
+      其它类型灯: (xyz=位置,z=1)</p>
+    <hr>
+    <h3>unity_WorldToLight</h3>
+    <p>从世界空间转换到灯光空间下，等同于旧版的_LightMatrix0.</p>
+    <hr>
+    <h2>Fog and Ambient</h2>
+    <h3>unity_AmbientSky</h3>
+    <p>环境光（Gradient）中的Sky Color.</p>
+    <hr>
+    <h3>unity_AmbientEquator</h3>
+    <p>环境光（Gradient）中的Equator Color.</p>
+    <hr>
+    <h3>unity_AmbientGround</h3>
+    <p>环境光（Gradient）中的Ground Color.</p>
+    <hr>
+    <h3>UNITY_LIGHTMODEL_AMBIENT</h3>
+    <p>环境光(Color)中的颜色，等同于环境光（Gradient）中的Sky Color.</p>
+    <hr>
+    <h2>GPU Instancing</h2>
+    <h3>实现步骤</h3>
+    <p>用于对多个对象(网格一样，材质一样，但是材质属性不一样)合批,单个合批最大上限为511个对象.</p>
+    <ol>
+      <li>#pragma multi_compile_instancing 添加此指令后会使材质面板上曝露Instaning开关,同时会生成相应的Instancing变体</li>
+      <li>UNITY_VERTEX_INPUT_INSTANCE_ID 在顶点着色器的输入(appdata)和输出(v2f,可选项)中添加</li>
+      <li>UNITY_INSTANCING_BUFFER_START(arrayName) / UNITY_INSTANCING_BUFFER_END(arrayName) 将每个你需要实例化的属性都封装在这个常量寄存器中
+      </li>
+      <li>UNITY_DEFINE_INSTANCED_PROP(type, name) 在上面的START和END间把需要的每条属性加进来</li>
+      <li>UNITY_SETUP_INSTANCE_ID(v); 需放在顶点着色器/片断着色器(可选)中最开始的地方,这样才能访问到全局的unity_InstanceID</li>
+      <li>UNITY_TRANSFER_INSTANCE_ID(v, o); 当需要将实例化ID传到片断着色器时,在顶点着色器中添加</li>
+      <li>UNITY_ACCESS_INSTANCED_PROP(arrayName, propName) 在片断着色器中访问具体的实例化变量</li>
+    </ol>
+    <hr>
+    <h3>Instancing选项</h3>
+    <p>对GPU Instancing进行一些设置</p>
+    <ul>
+      <li>#pragma instancing_options forcemaxcount:batchSize 强制设置单个批次内Instancing的最大数量,最大值和默认值是500</li>
+      <li>#pragma instancing_options maxcount:batchSize 设置单个批次内Instancing的最大数量,仅Vulkan, Xbox One和Switch有效</li>
+    </ul>
+
+  </article>
+</body>
+
+</html>

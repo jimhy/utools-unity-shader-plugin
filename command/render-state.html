@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>render-state</title>
+  <link rel="stylesheet" href="./res/common.css">
+  <link rel="stylesheet" href="./res/katex.min.css">
+</head>
+
+<body>
+  <article class="markdown-body">
+    <h2>Cull</h2>
+    <h3>Cull Back | Front | Off</h3>
+    <p>背面剔除,默认值为Back。</p>
+    <ul>
+      <li>Back：表示剔除背面，也就是显示正面，这也是最常用的设置。</li>
+      <li>Front：表示剔除前面，只显示背面。</li>
+      <li>Off:表示关闭剔除，也就是正反面都渲染。</li>
+    </ul>
+    <h2>模板测试</h2>
+    <h3>Stencil</h3>
+    <p>
+      模板缓冲区(StencilBuffer)可以为屏幕上的每个像素点保存一个无符号整数值,这个值的具体意义视程序的具体应用而定.在渲染的过程中,可以用这个值与一个预先设定的参考值相比较,根据比较的结果来决定是否更新相应的像素点的颜色值.这个比较的过程被称为模板测试.
+      将StencilBuffer的值与ReadMask与运算，然后与Ref值进行Comp比较，结果为true时进行Pass操作，否则进行Fail操作，操作值写入StencilBuffer前先与WriteMask与运算.
+      <span style="color:#cc0000;display: block;"><span class="cjk_fallback">公式：(Ref &amp;amp; ReadMask) Comp
+          (StencilBufferValue &amp;amp;
+          ReadMask)</span></span>
+    </p>
+    <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>Stencil</span>
+</div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>Ref</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_Stencil</span><span class='ace_paren ace_rparen'>]</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>ReadMask</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_StencilReadMask</span><span class='ace_paren ace_rparen'>]</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>WriteMask</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_StencilWriteMask</span><span class='ace_paren ace_rparen'>]</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>Comp</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_StencilComp</span><span class='ace_paren ace_rparen'>]</span> <span class='ace_paren ace_lparen'>((</span><span class='ace_identifier'>UnityEngine</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>Rendering</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>CompareFunction</span><span class='ace_paren ace_rparen'>))</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>Pass</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_StencilOp</span><span class='ace_paren ace_rparen'>]</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>UnityEngine</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>Rendering</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>StencilOp</span><span class='ace_paren ace_rparen'>)</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>Fail</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_Fail</span><span class='ace_paren ace_rparen'>]</span>
+</div><div class='ace_line'>  <span class='ace_identifier'>ZFail</span> <span class='ace_paren ace_lparen'>[</span><span class='ace_identifier'>_ZFail</span><span class='ace_paren ace_rparen'>]</span>
+</div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
+</div></div></div></code></pre>
+    <ul>
+      <li>Ref: 设定的参考值,这个值将用来与模板缓冲中的值进行比较.取值范围位为0-255的整数.</li>
+      <li>ReadMask:
+        ReadMask的值将和Ref的值以及模板缓冲中的值进行按位与（&amp;）操作,取值范围也是0-255的整数,默认值为255(二进制位11111111),即读取的时候不对Ref的值和模板缓冲中的值产生修改,读取的还是原始值.
+      </li>
+      <li>WriteMask: WriteMask的值是当写入模板缓冲时进行的按位与操作,取值范围是0-255的整数,默认值也是255,即不做任何修改.</li>
+      <li>Comp: 定义Ref与模板缓冲中的值比较的操作函数,默认值为always.</li>
+      <li>Pass: 当模板测试（和深度测试）通过时,则根据（stencilOperation值）对模板缓冲值进行处理,默认值为keep.</li>
+      <li>Fail: 当模板测试（和深度测试）失败时,则根据（stencilOperation值）对模板缓冲值进行处理，默认值为keep.</li>
+      <li>ZFail: 当模板测试通过而深度测试失败时,则根据（stencilOperation值）对模板缓冲值进行处理，默认值为keep.</li>
+    </ul>
+    <hr>
+    <h3>Comp（比较操作）</h3>
+    <ul>
+      <li>Less： 相当于“&lt;”操作，即仅当左边&lt;右边，模板测试通过，渲染像素.</li>
+      <li>Greater： 相当于“&gt;”操作，即仅当左边&gt;右边，模板测试通过，渲染像素.</li>
+      <li>Lequal： 相当于“&lt;=”操作，即仅当左边&lt;=右边，模板测试通过，渲染像素.</li>
+      <li>Gequal： 相当于“&gt;=”操作，即仅当左边&gt;=右边，模板测试通过，渲染像素.</li>
+      <li>Equal： 相当于“=”操作，即仅当左边=右边，模板测试通过，渲染像素.</li>
+      <li>NotEqual： 相当于“!=”操作，即仅当左边！=右边，模板测试通过，渲染像素.</li>
+      <li>Always： 不管公式两边为何值，模板测试总是通过，渲染像素.</li>
+      <li>Never: 不管公式两边为何值，模板测试总是失败 ，像素被抛弃.</li>
+    </ul>
+    <hr>
+    <h3>模版缓冲区的更新</h3>
+    <ul>
+      <li>Keep： 保留当前缓冲中的内容，即stencilBufferValue不变.</li>
+      <li>Zero： 将0写入缓冲，即stencilBufferValue值变为0.</li>
+      <li>Replace： 将参考值写入缓冲，即将referenceValue赋值给stencilBufferValue.</li>
+      <li>IncrSat： 将当前模板缓冲值加1，如果stencilBufferValue超过255了，那么保留为255，即不大于255.</li>
+      <li>DecrSat： 将当前模板缓冲值减1，如果stencilBufferValue超过为0，那么保留为0，即不小于0.</li>
+      <li>NotEqual： 相当于“!=”操作，即仅当左边！=右边，模板测试通过，渲染像素.</li>
+      <li>Invert： 将当前模板缓冲值（stencilBufferValue）按位取反.</li>
+      <li>IncrWrap: 当前缓冲的值加1，如果缓冲值超过255了，那么变成0，（然后继续自增）.</li>
+      <li>DecrWrap: 当前缓冲的值减1，如果缓冲值已经为0，那么变成255，（然后继续自减）.</li>
+    </ul>
+    <hr>
+    <h2>深度缓冲</h2>
+    <h3>ZTest (Less | Greater | LEqual | GEqual | Equal | NotEqual | Never | Always)</h3>
+    <p>深度测试，拿当前像素的深度值与深度缓冲中的深度值进行比较，默认值为LEqual。可通过在属性中添加枚举UnityEngine.Rendering.CompareFunction</p>
+    <ul>
+      <li>Less：小于，表示如果当前像素的深度值小于深度缓冲中的深度值，则通过，以下类同。</li>
+      <li>Greater：大于。</li>
+      <li>Lequal：小于等于。</li>
+      <li>Gequal：大于等于。</li>
+      <li>Equal：等于。</li>
+      <li>NotEqual：不等于。</li>
+      <li>Never: 永远不通过.</li>
+      <li>Always：永远通过。</li>
+    </ul>
+    <hr>
+    <h3>ZTest[unity_GUIZTestMode]</h3>
+    <p>unity_GUIZTestMode用于UI材质中，此值默认为LEqual,仅当UI中Canvas模式为Overlay时，值为Always.</p>
+    <hr>
+    <h3>ZWrite On | Off</h3>
+    <p>深度写入，默认值为On。</p>
+    <ul>
+      <li>On：向深度缓冲中写入深度值。</li>
+      <li>Off：关闭深度写入。</li>
+    </ul>
+    <hr>
+    <h3>Offset Factor, Units</h3>
+    <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
+            <semantics>
+              <mrow>
+                <mtext>深度偏移，</mtext>
+                <mi>o</mi>
+                <mi>f</mi>
+                <mi>f</mi>
+                <mi>s</mi>
+                <mi>e</mi>
+                <mi>t</mi>
+                <mo>=</mo>
+                <mo stretchy="false">(</mo>
+                <mi>m</mi>
+                <mo>∗</mo>
+                <mi>f</mi>
+                <mi>a</mi>
+                <mi>c</mi>
+                <mi>t</mi>
+                <mi>o</mi>
+                <mi>r</mi>
+                <mo stretchy="false">)</mo>
+                <mo>+</mo>
+                <mo stretchy="false">(</mo>
+                <mi>r</mi>
+                <mo>∗</mo>
+                <mi>u</mi>
+                <mi>n</mi>
+                <mi>i</mi>
+                <mi>t</mi>
+                <mi>s</mi>
+                <mo stretchy="false">)</mo>
+                <mtext>，默认值为</mtext>
+                <mn>0</mn>
+                <mo separator="true">,</mo>
+                <mn>0</mn>
+              </mrow>
+              <annotation encoding="application/x-tex">深度偏移，offset = (m * factor) + (r * units)，默认值为0,0</annotation>
+            </semantics>
+          </math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut"
+              style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord cjk_fallback">深度偏移，</span><span
+              class="mord mathnormal">o</span><span class="mord mathnormal"
+              style="margin-right:0.10764em;">ff</span><span class="mord mathnormal">se</span><span
+              class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span
+              class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span
+            class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span
+              class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace"
+              style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace"
+              style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut"
+              style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal"
+              style="margin-right:0.10764em;">f</span><span class="mord mathnormal">a</span><span
+              class="mord mathnormal">c</span><span class="mord mathnormal">t</span><span class="mord mathnormal"
+              style="margin-right:0.02778em;">or</span><span class="mclose">)</span><span class="mspace"
+              style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace"
+              style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut"
+              style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span
+              class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace"
+              style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace"
+              style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut"
+              style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">u</span><span
+              class="mord mathnormal">ni</span><span class="mord mathnormal">t</span><span
+              class="mord mathnormal">s</span><span class="mclose">)</span><span
+              class="mord cjk_fallback">，默认值为</span><span class="mord">0</span><span class="mpunct">,</span><span
+              class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span></span></span></span></p>
+    <ul>
+      <li>m：指多边形的深度斜率（在光栅化阶段计算得出）中的最大值,多边形越是与近裁剪面平行，m值就越接近0。</li>
+      <li>r：表示能产生在窗口坐标系的深度值中可分辨的差异的最小值，r是由具体实现OpenGL的平台指定的一个常量。</li>
+    </ul>
+    <p>结论：一个大于0的offset会把模型推远，一个小于0的offset会把模型拉近。</p>
+    <hr>
+    <h2>颜色遮罩</h2>
+    <h3>ColorMask RGB | A | 0 | R、G、B、A的任意组合</h3>
+    <p>颜色遮罩，默认值为：RGBA，表示写入RGBA四个通道。</p>
+    <hr>
+    <h2>混合</h2>
+    <h3>说明</h3>
+    <p>源颜色<em>SrcFactor + 目标颜色</em>DstFactor
+      颜色混合，源颜色与目标颜色以给定的公式进行混合出最终的新颜色。</p>
+    <ul>
+      <li>源颜色：当前Shader计算出的颜色。</li>
+      <li>目标颜色：已经存在颜色缓存中的颜色。默认值为Blend Off,即表示关闭混合。</li>
+    </ul>
+    <p>在混合时可以针对某个RT做混合，比如Blend 3 One One,就是对RenderTarget3做混合。</p>
+    <hr>
+    <h3>Blend SrcFactor DstFactor</h3>
+    <p>SrcFactor为源颜色因子，DstFactor为目标颜色因子，将两者按Op中指定的操作进行混合。</p>
+    <hr>
+    <h3>Blend SrcFactor DstFactor, SrcFactorA DstFactorA</h3>
+    <p>对RGB和A通道分别做混合操作。</p>
+    <hr>
+    <h3>BlendOp Op</h3>
+    <p>对RGB和A通道分别做混合操作。</p>
+    <hr>
+    <h3>BlendOp OpColor, OpAlpha</h3>
+    <p>对RGB和A通道分别指定混合运算符。</p>
+    <hr>
+    <h3>AlphaToMask On | Off</h3>
+    <p>当值为On时，在使用MSAA时，会根据像素结果将alpha值进行修改多重采样覆盖率，对植被和其他经过alpha测试的着色器非常有用。</p>
+    <hr>
+    <h3>Blend factors</h3>
+    <p>混合因子</p>
+    <ul>
+      <li>One：源或目标的完整值</li>
+      <li>Zero：0</li>
+      <li>SrcColor：源的颜色值</li>
+      <li>SrcAlpha：源的Alpha值</li>
+      <li>DstColor：目标的颜色值</li>
+      <li>DstAlpha：目标的Alpha值</li>
+      <li>OneMinusSrcColor：1-源颜色得到的值</li>
+      <li>OneMinusSrcAlpha：1-源Alpha得到的值</li>
+      <li>OneMinusDstColor：1-目标颜色得到的值</li>
+      <li>OneMinusDstAlpha：1-目标Alpha得到的值</li>
+    </ul>
+    <hr>
+    <h3>Blend Types</h3>
+    <p>常用的几种混合类型</p>
+    <ul>
+      <li>Blend SrcAlpha OneMinusSrcAlpha// Traditional transparency</li>
+      <li>Blend One OneMinusSrcAlpha// Premultiplied transparency</li>
+      <li>Blend One One</li>
+      <li>Blend OneMinusDstColor One // Soft Additive</li>
+      <li>Blend DstColor Zero // Multiplicative</li>
+      <li>Blend DstColor SrcColor // 2x Multiplicative</li>
+    </ul>
+    <hr>
+    <h3>Blend operations</h3>
+    <p>混合操作的具体运算符</p>
+    <ul>
+      <li>Add：源+目标</li>
+      <li>Sub：源-目标</li>
+      <li>RevSub：目标-源</li>
+      <li>Min：源与目标中最小值</li>
+      <li>Max：源与目标中最大值</li>
+    </ul>
+    <p>以下仅用于DX11.1中</p>
+    <ul>
+      <li>LogicalClear</li>
+      <li>LogicalSet</li>
+      <li>LogicalCopy</li>
+      <li>LogicalCopyInverted</li>
+      <li>LogicalNoop</li>
+      <li>LogicalInvert</li>
+      <li>LogicalAnd</li>
+      <li>LogicalNand</li>
+      <li>LogicalOr</li>
+      <li>LogicalNor</li>
+      <li>LogicalXor</li>
+      <li>LogicalEquiv</li>
+      <li>LogicalAndReverse</li>
+      <li>LogicalAndInverted</li>
+      <li>LogicalOrReverse</li>
+      <li>LogicalOrInverted</li>
+    </ul>
+
+  </article>
+</body>
+
+</html>
