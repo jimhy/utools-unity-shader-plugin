@@ -10,7 +10,7 @@
 <body>
   <article class="markdown-body">
     <h2>Pragma</h2>
-    <h3>#pragma target 2.0</h3>
+    <h3 id="#pragma target 2.0">#pragma target 2.0</h3>
     <p>Shader编绎目标级别，默认值为2.5
       可以通过#if (SHADER_TARGET &lt; 30)来做分支判断</p>
     <ul>
@@ -23,8 +23,9 @@
       <li>4.6: 4.0 + cubearray + tesshw + tessellation</li>
       <li>5.0: 4.0 + compute + randomwrite + tesshw + tessellation</li>
     </ul>
-    <hr>
-    <h3>#pragma require xxx</h3>
+    
+<hr>
+    <h3 id="#pragma require xxx">#pragma require xxx</h3>
     <p>表明shader需要的特性功能</p>
     <ul>
       <li>interpolators10: 至少支持10个插值器(从顶点到片断)</li>
@@ -47,26 +48,32 @@
       <li>msaatex: 能够访问多采样纹理</li>
       <li>framebufferfetch: 主要用于在延迟渲染中减少采样的带宽消耗</li>
     </ul>
-    <hr>
-    <h3>#pragma shader_feature</h3>
+    
+<hr>
+    <h3 id="#pragma shader_feature">#pragma shader_feature</h3>
     <p>变体声明，常用于不需要程序控制开关的关键字，在编缉器的材质上设置，打包时会自动过滤</p>
-    <hr>
-    <h3>#pragma shader_feature_local</h3>
+    
+<hr>
+    <h3 id="#pragma shader_feature_local">#pragma shader_feature_local</h3>
     <p>声明本地变体(shader_feature)，unity2019才支持的功能，每个Shader最多可以有64个本地变体，不占用全局变体的数量.</p>
-    <hr>
-    <h3>#pragma multi_compile</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile">#pragma multi_compile</h3>
     <p>变体声明，在打包时会把所有变体都打包进去，这是它与feature的区别.
       定义关键字时如果加两个下划线，则表示定义一个空的变体，主要目的是为了节省关键字.
       当使用shader变体时，记住在unity中全局关键字最多只有256个,而且在内部已经用了60个了,所以记得不要超标了.</p>
-    <hr>
-    <h3>#pragma multi_compile_local</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile_local">#pragma multi_compile_local</h3>
     <p>声明本地变体(multi_compile)，unity2019才支持的功能，每个Shader最多可以有64个本地变体，不占用全局变体的数量.</p>
-    <hr>
-    <h3>#pragma multi_compile_fog</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile_fog">#pragma multi_compile_fog</h3>
     <p>雾类型定义
       FOG_EXP FOG_EXP2 FOG_LINEAR</p>
-    <hr>
-    <h3>#pragma multi_compile_fwdbase novertexlight nodynlightmap nodirlightmap</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile_fwdbase novertexlight nodynlightmap nodirlightmap">#pragma multi_compile_fwdbase novertexlight nodynlightmap nodirlightmap</h3>
     <p>定义在LightMode = ForwardBase的Pass中,在此Pass中仅只持一个平行灯(逐像素)以及其它逐顶点灯和SH当照.这个指令的作用是一次性生成Unity在ForwardBase中需要的各种内置宏.</p>
     <ul>
       <li>DIRECTIONAL :主平行灯下的效果开启,fowwardBase下必开宏</li>
@@ -79,8 +86,9 @@
       <li>SHADOWS_SHADOWMASK:当灯光设置为Mixed,光照烘焙模式设置为shadowMask时开启</li>
       <li>VERTEXLIGHT_ON ：是否受到逐顶点的照明</li>
     </ul>
-    <hr>
-    <h3>#pragma multi_compile_fwdadd</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile_fwdadd">#pragma multi_compile_fwdadd</h3>
     <p>定义在LightMode=ForwardAdd的Pass中，在此Pass中用来计算其它的逐像素光照.而此指令的作用是一次性生成Unity在ForwardAdd中需要的各种内置宏.</p>
     <ul>
       <li>DIRECTIONAL :判断当前灯是否为平行灯.</li>
@@ -89,30 +97,37 @@
       <li>POINT_COOKIE :判断当前灯是否为Cookie点灯.</li>
       <li>SPOT :判断当前灯是否为聚光灯.</li>
     </ul>
-    <hr>
-    <h3>#pragma multi_compile_shadowcaster</h3>
+    
+<hr>
+    <h3 id="#pragma multi_compile_shadowcaster">#pragma multi_compile_shadowcaster</h3>
     <p>定义在LightMode=ShadowCaster的Pass中，会自动生成两个宏:</p>
     <ul>
       <li>SHADOWS_DEPTH :用于生成直线光和聚光灯阴影.</li>
       <li>SHADOW_CUBE :用于生成点光源阴影.</li>
     </ul>
-    <hr>
-    <h3>#pragma skip_variants XXX01 XXX02...</h3>
+    
+<hr>
+    <h3 id="#pragma skip_variants XXX01 XXX02...">#pragma skip_variants XXX01 XXX02...</h3>
     <p>剔除指定的变体，可同时剔除多个</p>
-    <hr>
-    <h3>#pragma fragmentoption ARB_precision_hint_fastest</h3>
+    
+<hr>
+    <h3 id="#pragma fragmentoption ARB_precision_hint_fastest">#pragma fragmentoption ARB_precision_hint_fastest</h3>
     <p>最快的,意思就是会用低精度(一般是指fp16),以提升片段着色器的运行速度,减少时间.</p>
-    <hr>
-    <h3>#pragma fragmentoption ARB_precision_hint_nicest</h3>
+    
+<hr>
+    <h3 id="#pragma fragmentoption ARB_precision_hint_nicest">#pragma fragmentoption ARB_precision_hint_nicest</h3>
     <p>最佳的,会用高精度(一般是指fp32),可能会降低运行速度,增加时间.</p>
-    <hr>
-    <h3>#pragma enable_d3d11_debug_symbols</h3>
+    
+<hr>
+    <h3 id="#pragma enable_d3d11_debug_symbols">#pragma enable_d3d11_debug_symbols</h3>
     <p>开启d3d11调试，加此命令后相关的名称与代码不会被剔除，便于在调试工具中进行查看分析</p>
-    <hr>
-    <h3>#pragma shader_feature EDITOR_VISUALIZATION</h3>
+    
+<hr>
+    <h3 id="#pragma shader_feature EDITOR_VISUALIZATION">#pragma shader_feature EDITOR_VISUALIZATION</h3>
     <p>开启Material Validation,Scene视图中的模式，用于查看超出范围的像素颜色</p>
-    <hr>
-    <h3>#pragma only_renderers</h3>
+    
+<hr>
+    <h3 id="#pragma only_renderers">#pragma only_renderers</h3>
     <p>仅编译指定平台的Shader</p>
     <ol>
       <li>d3d11 - Direct3D 11/12</li>
@@ -128,25 +143,30 @@
       <li>n3ds - Nintendo 3DS</li>
       <li>wiiu - Nintendo Wii U</li>
     </ol>
-    <hr>
-    <h3>#pragma exclude_renderers</h3>
+    
+<hr>
+    <h3 id="#pragma exclude_renderers">#pragma exclude_renderers</h3>
     <p>剔除掉指定平台的相关代码,列表参考上面</p>
-    <hr>
-    <h3>#define NAME</h3>
+    
+<hr>
+    <h3 id="#define NAME">#define NAME</h3>
     <p>定义一个叫NAME的字段，在CG代码中可以通过#if defined(NAME)来判断走不同的分支。</p>
-    <hr>
-    <h3>#define NAME 1</h3>
+    
+<hr>
+    <h3 id="#define NAME 1">#define NAME 1</h3>
     <p>定义一个叫NAME的字段并且它的值为1.</p>
     <ol>
       <li>可以通过#if defined(NAME)来判断走不同的分支。</li>
       <li>可以通过#if NAME来判断走不同的分支。（此时值为非0时才有效，为0时不走此分支）</li>
       <li>还可以直接通过NAME来得到它的值，比如上面的1。</li>
     </ol>
-    <hr>
-    <h3>#error xxx</h3>
+    
+<hr>
+    <h3 id="#error xxx">#error xxx</h3>
     <p>多用于分支的判断中，利用此语句可直接输出一条报错信息，内容为xxx</p>
 
   </article>
 </body>
 
 </html>
+<hr>

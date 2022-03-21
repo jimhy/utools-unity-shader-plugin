@@ -10,59 +10,68 @@
 <body>
   <article class="markdown-body">
     <h2>Math</h2>
-    <h3>abs (x)</h3>
+    <h3 id="abs (x)">abs (x)</h3>
     <p>取绝对值，即正值返回正值，负值返回的还是正值,x值也可以为向量</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_support ace_function ace_C99 ace_c'>abs</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>a</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>max</span><span class='ace_paren ace_lparen'>(</span><span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>a</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>acos (x)</h3>
+    
+<hr>
+    <h3 id="acos (x)">acos (x)</h3>
     <p>反余切函数,输入参数范围为[-1, 1],返回[0, π] 区间的角度值</p>
-    <hr>
-    <h3>all (a)</h3>
+    
+<hr>
+    <h3 id="all (a)">all (a)</h3>
     <p>当a或a的所有分量都为true或者非0时返回1(true),否则返回0(false).</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>bool</span> <span class='ace_identifier'>all</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>bool4</span> <span class='ace_identifier'>a</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>&#38;&#38;</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>&#38;&#38;</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>&#38;&#38;</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>any (a)</h3>
+    
+<hr>
+    <h3 id="any (a)">any (a)</h3>
     <p>如果a=0或者a中的所有分量为0，则返回0(false);否则返回1(true).</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>bool</span> <span class='ace_identifier'>any</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>bool4</span> <span class='ace_identifier'>a</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>||</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>||</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>||</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>asin (x)</h3>
+    
+<hr>
+    <h3 id="asin (x)">asin (x)</h3>
     <p>返回x的反正弦值,范围为(-π/2,π/2)</p>
-    <hr>
-    <h3>atan2 (y,x)</h3>
+    
+<hr>
+    <h3 id="atan2 (y,x)">atan2 (y,x)</h3>
     <p>返回y/x的反正切值</p>
-    <hr>
-    <h3>atan (x)</h3>
+    
+<hr>
+    <h3 id="atan (x)">atan (x)</h3>
     <p>返回x的反正切值,范围为(-π/2,π/2),表示弧度</p>
-    <hr>
-    <h3>ceil (x)</h3>
+    
+<hr>
+    <h3 id="ceil (x)">ceil (x)</h3>
     <p>对x进行向上取整，即x=0.1返回1，x=1.5返回2，x=-0.3返回0</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_support ace_function ace_C99 ace_c'>ceil</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_keyword ace_operator'>-</span><span class='ace_support ace_function ace_C99 ace_c'>floor</span><span class='ace_paren ace_lparen'>(</span><span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>clamp(x,a,b)</h3>
+    
+<hr>
+    <h3 id="clamp(x,a,b)">clamp(x,a,b)</h3>
     <p>如果 x 值小于 a，则返回 a;如果 x 值大于 b,返回 ;否则，返回 x.</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>clamp</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>b</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>max</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>min</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>b</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>clip (x)</h3>
+    
+<hr>
+    <h3 id="clip (x)">clip (x)</h3>
     <p>如果x&lt;0则裁剪掉此片断</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>void</span> <span class='ace_identifier'>clip</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>float4</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
@@ -70,39 +79,45 @@
 </div><div class='ace_line'>    <span class='ace_identifier'>discard</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>cosh (x)</h3>
+    
+<hr>
+    <h3 id="cosh (x)">cosh (x)</h3>
     <p>双曲余弦函数</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_support ace_function ace_C99 ace_c'>cosh</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_constant ace_numeric'>0.5</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_support ace_function ace_C99 ace_c'>exp</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_support ace_function ace_C99 ace_c'>exp</span><span class='ace_paren ace_lparen'>(</span><span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>cross (a,b)</h3>
+    
+<hr>
+    <h3 id="cross (a,b)">cross (a,b)</h3>
     <p>返回两个三维向量a与b的叉积</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>float3</span> <span class='ace_identifier'>cross</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>float3</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>float3</span> <span class='ace_identifier'>b</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>yzx</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>b</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>zxy</span> <span class='ace_keyword ace_operator'>-</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>zxy</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>b</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>yzx</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>degrees (x)</h3>
+    
+<hr>
+    <h3 id="degrees (x)">degrees (x)</h3>
     <p>将x从弧度转换成角度</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>degrees</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_constant ace_numeric'>57.29577951</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>x</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>determinant (M)</h3>
+    
+<hr>
+    <h3 id="determinant (M)">determinant (M)</h3>
     <p>返回方阵M的行列式,注意只有方阵才有行列式</p>
-    <hr>
-    <h3>dot (a,b)</h3>
+    
+<hr>
+    <h3 id="dot (a,b)">dot (a,b)</h3>
     <p>点乘，a和b可以为标量也可以为向量,其计算结果是两个向量夹角的余弦值，相当于|a|<em>|b|<em>cos(θ)或者a.x</em>b.x+a.y</em>b.y+a.z*b.z
       a和b的位置无所谓前后，结果都是一样的。</p>
-    <hr>
-    <h3>distance (a,b)</h3>
+    
+<hr>
+    <h3 id="distance (a,b)">distance (a,b)</h3>
     <p>返回a,b间的距离.</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>distance</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>b</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
@@ -110,18 +125,22 @@
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_support ace_function ace_C99 ace_c'>sqrt</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>dot</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>v</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_identifier'>v</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>exp(x)</h3>
+    
+<hr>
+    <h3 id="exp(x)">exp(x)</h3>
     <p>计算e的x次方，e = 2.71828182845904523536</p>
-    <hr>
-    <h3>exp2 (x)</h3>
+    
+<hr>
+    <h3 id="exp2 (x)">exp2 (x)</h3>
     <p>计算2的x次方</p>
-    <hr>
-    <h3>floor (x)</h3>
+    
+<hr>
+    <h3 id="floor (x)">floor (x)</h3>
     <p>对x值进行向下取整(去尾求整)
       比如:floor (0.6) = 0.0,floor (-0.6) = -1.0</p>
-    <hr>
-    <h3>fmod (x,y)</h3>
+    
+<hr>
+    <h3 id="fmod (x,y)">fmod (x,y)</h3>
     <p>返回x/y的余数。如果y为0，结果不可预料,注意！如果x为负值，返回的结果也是负值！</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_support ace_function ace_C99 ace_c'>fmod</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>a</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>b</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
@@ -129,19 +148,22 @@
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>a</span> <span class='ace_keyword ace_operator'>&#60;</span> <span class='ace_constant ace_numeric'>0</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_punctuation ace_operator'>?</span> <span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>c</span> <span class='ace_punctuation ace_operator'>:</span> <span class='ace_identifier'>c</span><span class='ace_punctuation ace_operator'>;</span>   <span class='ace_comment'>/* if ( a &#60; 0 ) c = 0-c */</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>frac (x)</h3>
+    
+<hr>
+    <h3 id="frac (x)">frac (x)</h3>
     <p>返回x的小数部分</p>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>frac</span><span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>-</span> <span class='ace_support ace_function ace_C99 ace_c'>floor</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>length (v)</h3>
+    
+<hr>
+    <h3 id="length (v)">length (v)</h3>
     <p>返回一个向量的模，即 sqrt(dot(v,v))</p>
-    <hr>
-    <h3>lerp (A,B,alpha)</h3>
+    
+<hr>
+    <h3 id="lerp (A,B,alpha)">lerp (A,B,alpha)</h3>
     <p>线性插值.
       如果alpha=0，则返回A;
       如果alpha=1，则返回B;
@@ -151,52 +173,67 @@
 </div><div class='ace_line'>    <span class='ace_keyword ace_control'>return</span> <span class='ace_identifier'>A</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_identifier'>alpha</span><span class='ace_keyword ace_operator'>*</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>B</span><span class='ace_keyword ace_operator'>-</span><span class='ace_identifier'>A</span><span class='ace_paren ace_rparen'>)</span><span class='ace_punctuation ace_operator'>;</span>
 </div><div class='ace_line'><span class='ace_paren ace_rparen'>}</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>log (x)</h3>
+    
+<hr>
+    <h3 id="log (x)">log (x)</h3>
     <p>返回x的自然对数</p>
-    <hr>
-    <h3>max (a,b)</h3>
+    
+<hr>
+    <h3 id="max (a,b)">max (a,b)</h3>
     <p>比较两个标量或等长向量元素，返回最大值</p>
-    <hr>
-    <h3>min (a,b)</h3>
+    
+<hr>
+    <h3 id="min (a,b)">min (a,b)</h3>
     <p>比较两个标量或等长向量元素，返回最小值</p>
-    <hr>
-    <h3>mul (M,V)</h3>
+    
+<hr>
+    <h3 id="mul (M,V)">mul (M,V)</h3>
     <p>表示矩阵M与向量V进行点乘，结果就是对向量V进行M矩阵变换后的值</p>
-    <hr>
-    <h3>normalize (v)</h3>
+    
+<hr>
+    <h3 id="normalize (v)">normalize (v)</h3>
     <p>返回一个向量的归一化版本(方向一样，但是模为1)
       normalize(v) = rsqrt(dot(v,v))*v; rsqrt返回的是平方根的倒数</p>
-    <hr>
-    <h3>pow (x,y)</h3>
+    
+<hr>
+    <h3 id="pow (x,y)">pow (x,y)</h3>
     <p>返回x的y次方</p>
-    <hr>
-    <h3>reflect(I, N)</h3>
+    
+<hr>
+    <h3 id="reflect(I, N)">reflect(I, N)</h3>
     <p>根据入射光方向向量 I ，和顶点法向量 N ，计算反射光方向向量。其中 I 和 N 必须被归一化，需要非常注意的是，这个 I 是指向顶点的；函数只对三元向量有效。</p>
-    <hr>
-    <h3>refract(I,N,eta)</h3>
+    
+<hr>
+    <h3 id="refract(I,N,eta)">refract(I,N,eta)</h3>
     <p>计算折射向量， I 为入射光线， N 为法向量， eta 为折射系数；其中 I 和 N 必须被归一化，如果 I 和 N 之间的夹角太大，则返回（ 0 ， 0 ， 0 ），也就是没有折射光线； I
       是指向顶点的；函数只对三元向量有效。</p>
-    <hr>
-    <h3>round (x)</h3>
+    
+<hr>
+    <h3 id="round (x)">round (x)</h3>
     <p>返回x四舍五入的值</p>
-    <hr>
-    <h3>rsqrt (x)</h3>
+    
+<hr>
+    <h3 id="rsqrt (x)">rsqrt (x)</h3>
     <p>返回x的平方根倒数,注意x不能为0.相当于 pow(x, -0.5)</p>
-    <hr>
-    <h3>saturate (x)</h3>
+    
+<hr>
+    <h3 id="saturate (x)">saturate (x)</h3>
     <p>如果x&lt;0返回0,如果x&gt;1返回1,否则返回x.</p>
-    <hr>
-    <h3>sqrt (x)</h3>
+    
+<hr>
+    <h3 id="sqrt (x)">sqrt (x)</h3>
     <p>返回x的平方根.</p>
-    <hr>
-    <h3>step (a,b)</h3>
+    
+<hr>
+    <h3 id="step (a,b)">step (a,b)</h3>
     <p>如果a&lt;b返回1,否则返回0.</p>
-    <hr>
-    <h3>sign (x)</h3>
+    
+<hr>
+    <h3 id="sign (x)">sign (x)</h3>
     <p>如果x=0返回0,如果x&gt;0返回1,如果x&lt;0返回-1.</p>
-    <hr>
-    <h3>smoothstep (min,max,x)</h3>
+    
+<hr>
+    <h3 id="smoothstep (min,max,x)">smoothstep (min,max,x)</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>smoothstep</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>min</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>max</span><span class='ace_punctuation ace_operator'>,</span> <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span>
 </div><div class='ace_line'><span class='ace_paren ace_lparen'>{</span>
 </div><div class='ace_line'>    <span class='ace_storage ace_type'>float</span> <span class='ace_identifier'>t</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>saturate</span> <span class='ace_paren ace_lparen'>((</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>-</span> <span class='ace_identifier'>min</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>/</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>max</span> <span class='ace_keyword ace_operator'>-</span> <span class='ace_identifier'>min</span><span class='ace_paren ace_rparen'>))</span><span class='ace_punctuation ace_operator'>;</span>
@@ -207,57 +244,71 @@
       如果 x 比max 大，返回 1
       如果 x 处于范围 [min，max]中，则返回 0 和 1 之间的值(按值在min和max间的比例).
       如果只想要线性过渡，并不需要平滑的话，可以直接使用saturate((x - min)/(max - min))</p>
-    <hr>
+    
+<hr>
     <h2>纹理采样</h2>
-    <h3>tex1D(samper1D tex,float s)</h3>
+    <h3 id="tex1D(samper1D tex,float s)">tex1D(samper1D tex,float s)</h3>
     <p>一维纹理采样</p>
-    <hr>
-    <h3>tex2D(samper2D tex,float2 s)</h3>
+    
+<hr>
+    <h3 id="tex2D(samper2D tex,float2 s)">tex2D(samper2D tex,float2 s)</h3>
     <p>二维纹理采样</p>
-    <hr>
-    <h3>tex2Dlod(samper2D tex,float4 s)</h3>
+    
+<hr>
+    <h3 id="tex2Dlod(samper2D tex,float4 s)">tex2Dlod(samper2D tex,float4 s)</h3>
     <p>二维纹理采样,s.w表示采样的是mipmap的几级,仅在ES3.0以上支持.</p>
-    <hr>
-    <h3>tex2DProj(samper2D tex,float4 s)</h3>
+    
+<hr>
+    <h3 id="tex2DProj(samper2D tex,float4 s)">tex2DProj(samper2D tex,float4 s)</h3>
     <p>二维投影纹理采样</p>
-    <hr>
-    <h3>texCUBE(samperCUBE tex,float3 s)</h3>
+    
+<hr>
+    <h3 id="texCUBE(samperCUBE tex,float3 s)">texCUBE(samperCUBE tex,float3 s)</h3>
     <p>立方体纹理采样</p>
-    <hr>
+    
+<hr>
     <h2>常用指令</h2>
-    <h3>mov dest, src1</h3>
+    <h3 id="mov dest, src1">mov dest, src1</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>dest</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>src1</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>add dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="add dest, src1, src2">add dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>dest</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>src1</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_identifier'>src2</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_cjk' style='width:NaNpx'>可</span><span class='ace_cjk' style='width:NaNpx'>通</span><span class='ace_cjk' style='width:NaNpx'>过</span><span class='ace_cjk' style='width:NaNpx'>在</span><span class='ace_identifier'>src2</span><span class='ace_cjk' style='width:NaNpx'>前</span><span class='ace_cjk' style='width:NaNpx'>加</span><span class='ace_keyword ace_operator'>-</span><span class='ace_punctuation ace_operator'>,</span><span class='ace_cjk' style='width:NaNpx'>实</span><span class='ace_cjk' style='width:NaNpx'>现</span><span class='ace_cjk' style='width:NaNpx'>减</span><span class='ace_cjk' style='width:NaNpx'>功</span><span class='ace_cjk' style='width:NaNpx'>能</span><span class='ace_paren ace_rparen'>)</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>mul dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="mul dest, src1, src2">mul dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>dest</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>src1</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>div dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="div dest, src1, src2">div dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>dest</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>src1</span> <span class='ace_keyword ace_operator'>/</span> <span class='ace_identifier'>src2</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>mad dest, src1, src2 , src3</h3>
+    
+<hr>
+    <h3 id="mad dest, src1, src2 , src3">mad dest, src1, src2 , src3</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>dest</span> <span class='ace_keyword ace_operator'>=</span> <span class='ace_identifier'>src1</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_identifier'>src3</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>dp2 dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="dp2 dest, src1, src2">dp2 dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_paren ace_rparen'>)</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>dp3 dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="dp3 dest, src1, src2">dp3 dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_paren ace_rparen'>)</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>dp4 dest, src1, src2</h3>
+    
+<hr>
+    <h3 id="dp4 dest, src1, src2">dp4 dest, src1, src2</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>x</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>y</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>z</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_keyword ace_operator'>+</span> <span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span> <span class='ace_keyword ace_operator'>*</span> <span class='ace_identifier'>src2</span><span class='ace_punctuation ace_operator'>.</span><span class='ace_identifier'>w</span><span class='ace_paren ace_rparen'>)</span>
 </div></div></div></code></pre>
-    <hr>
-    <h3>rsq dest, src1</h3>
+    
+<hr>
+    <h3 id="rsq dest, src1">rsq dest, src1</h3>
     <pre><code class="language-c_cpp"><div class='ace-tm'><div class='ace_static_highlight' style='counter-reset:ace_line 0'><div class='ace_line'><span class='ace_identifier'>rsqrt</span><span class='ace_paren ace_lparen'>(</span><span class='ace_identifier'>src1</span><span class='ace_paren ace_rparen'>)</span> <span class='ace_cjk' style='width:NaNpx'>对</span><span class='ace_identifier'>src1</span><span class='ace_cjk' style='width:NaNpx'>进</span><span class='ace_cjk' style='width:NaNpx'>行</span><span class='ace_cjk' style='width:NaNpx'>平</span><span class='ace_cjk' style='width:NaNpx'>方</span><span class='ace_cjk' style='width:NaNpx'>根</span><span class='ace_cjk' style='width:NaNpx'>的</span><span class='ace_cjk' style='width:NaNpx'>倒</span><span class='ace_cjk' style='width:NaNpx'>数</span><span class='ace_cjk' style='width:NaNpx'>，</span><span class='ace_cjk' style='width:NaNpx'>然</span><span class='ace_cjk' style='width:NaNpx'>后</span><span class='ace_cjk' style='width:NaNpx'>将</span><span class='ace_cjk' style='width:NaNpx'>值</span><span class='ace_cjk' style='width:NaNpx'>存</span><span class='ace_cjk' style='width:NaNpx'>入</span><span class='ace_identifier'>dest</span><span class='ace_cjk' style='width:NaNpx'>中</span>
 </div></div></div></code></pre>
 
@@ -265,3 +316,4 @@
 </body>
 
 </html>
+<hr>

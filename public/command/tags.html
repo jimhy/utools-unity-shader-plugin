@@ -10,164 +10,212 @@
 <body>
   <article class="markdown-body">
     <h2>Tags</h2>
-    <h3>Tags { &quot;TagName1&quot; = &quot;Value1&quot; &quot;TagName2&quot; = &quot;Value2&quot; }</h3>
+    <h3 id="Tags { &quot;TagName1&quot; = &quot;Value1&quot; &quot;TagName2&quot; = &quot;Value2&quot; }">Tags { &quot;TagName1&quot; = &quot;Value1&quot; &quot;TagName2&quot; = &quot;Value2&quot; }</h3>
     <p>Tag的语法结构，通过Tags{}来表示需要添加的标识,大括号内可以添加多组Tag（所以才叫Tags嘛）,名称（TagName）和值（Value）是成对成对出现的，并且全部用字符串表示。</p>
-    <hr>
+    
+<hr>
     <h2>Queue</h2>
-    <h3>Queue</h3>
+    <h3 id="Queue">Queue</h3>
     <p>渲染队列直接影响性能中的重复绘制，合理的队列可极大的提升渲染效率。
       渲染队列数&lt;=2500的对象都被认为是不透明的物体（从前往后渲染），&gt;2500的被认为是半透明物体（从后往前渲染）。
       &quot;Queue&quot; = &quot;Geometry+1&quot; 可通过在值后加数字的方式来改变队列。</p>
-    <hr>
-    <h3>&quot;Queue&quot; = &quot;Background&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;Queue&quot; = &quot;Background&quot;">&quot;Queue&quot; = &quot;Background&quot;</h3>
     <p>值为1000，此队列的对象最先进行渲染。</p>
-    <hr>
-    <h3>&quot;Queue&quot; = &quot;Geometry&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;Queue&quot; = &quot;Geometry&quot;">&quot;Queue&quot; = &quot;Geometry&quot;</h3>
     <p>默认值，值为2000，通常用于不透明对象，比如场景中的物件与角色等。</p>
-    <hr>
-    <h3>&quot;Queue&quot; = &quot;AlphaTest&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;Queue&quot; = &quot;AlphaTest&quot;">&quot;Queue&quot; = &quot;AlphaTest&quot;</h3>
     <p>值为2450，要么完全透明要么完全不透明，多用于利用贴图来实现边缘透明的效果，也就是美术常说的透贴。</p>
-    <hr>
-    <h3>&quot;Queue&quot; = &quot;Transparent&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;Queue&quot; = &quot;Transparent&quot;">&quot;Queue&quot; = &quot;Transparent&quot;</h3>
     <p>值为3000，常用于半透明对象，渲染时从后往前进行渲染，建议需要混合的对象放入此队列。</p>
-    <hr>
-    <h3>&quot;Queue&quot; = &quot;Overlay&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;Queue&quot; = &quot;Overlay&quot;">&quot;Queue&quot; = &quot;Overlay&quot;</h3>
     <p>值为4000,此渲染队列用于叠加效果。最后渲染的东西应该放在这里（例如镜头光晕等）。</p>
-    <hr>
+    
+<hr>
     <h2>RenderType</h2>
-    <h3>RenderType</h3>
+    <h3 id="RenderType">RenderType</h3>
     <p>用来区别这个Shader要渲染的对象是属于什么类别的，你可以想像成是我们把各种不同的物体按我们需要的类型来进行分类一样。
       当然你也可以根据需要改成自定义的名称，这样并不会影响到Shader的效果。
       此Tag多用于摄像机的替换材质功能(Camera.SetReplacementShader)。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;Opaque&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;Opaque&quot;">&quot;RenderType&quot; = &quot;Opaque&quot;</h3>
     <p>大多数不透明着色器。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;Transparent&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;Transparent&quot;">&quot;RenderType&quot; = &quot;Transparent&quot;</h3>
     <p>大多数半透明着色器，比如粒子、特效、字体等。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;TransparentCutout&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;TransparentCutout&quot;">&quot;RenderType&quot; = &quot;TransparentCutout&quot;</h3>
     <p>透贴着色器，多用于植被等。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;Background&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;Background&quot;">&quot;RenderType&quot; = &quot;Background&quot;</h3>
     <p>多用于天空盒着色器。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;Overlay&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;Overlay&quot;">&quot;RenderType&quot; = &quot;Overlay&quot;</h3>
     <p>GUI、光晕着色器等。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;TreeOpaque&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;TreeOpaque&quot;">&quot;RenderType&quot; = &quot;TreeOpaque&quot;</h3>
     <p>Terrain地形中的树干。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;TreeTransparentCutout&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;TreeTransparentCutout&quot;">&quot;RenderType&quot; = &quot;TreeTransparentCutout&quot;</h3>
     <p>Terrain地形中的树叶。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;TreeBillboard&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;TreeBillboard&quot;">&quot;RenderType&quot; = &quot;TreeBillboard&quot;</h3>
     <p>Terrain地形中的永对面树。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;Grass&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;Grass&quot;">&quot;RenderType&quot; = &quot;Grass&quot;</h3>
     <p>Terrain地形中的草。</p>
-    <hr>
-    <h3>&quot;RenderType&quot; = &quot;GrassBillboard&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;RenderType&quot; = &quot;GrassBillboard&quot;">&quot;RenderType&quot; = &quot;GrassBillboard&quot;</h3>
     <p>Terrain地形中的永对面草。</p>
-    <hr>
+    
+<hr>
     <h2>DisableBatching</h2>
-    <h3>DisableBatching</h3>
+    <h3 id="DisableBatching">DisableBatching</h3>
     <p>在利用Shader在模型的顶点本地坐标下做一些位移动画，而当此模型有批处理时会出现效果不正确的情况，这是因为批处理会将所有模型转换为世界坐标空间，因此“本地坐标空间”将丢失。</p>
-    <hr>
-    <h3>&quot;DisableBatching&quot; = &quot;True&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;DisableBatching&quot; = &quot;True&quot;">&quot;DisableBatching&quot; = &quot;True&quot;</h3>
     <p>禁用批处理。</p>
-    <hr>
-    <h3>&quot;DisableBatching&quot; = &quot;False&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;DisableBatching&quot; = &quot;False&quot;">&quot;DisableBatching&quot; = &quot;False&quot;</h3>
     <p>不禁用批处理。</p>
-    <hr>
-    <h3>&quot;DisableBatching&quot; = &quot;LODFading&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;DisableBatching&quot; = &quot;LODFading&quot;">&quot;DisableBatching&quot; = &quot;LODFading&quot;</h3>
     <p>仅当LOD激活时禁用批处理。</p>
-    <hr>
+    
+<hr>
     <h2>ForceNoShadowCasting</h2>
-    <h3>ForceNoShadowCasting</h3>
+    <h3 id="ForceNoShadowCasting">ForceNoShadowCasting</h3>
     <p>是否强制关闭投射阴影。</p>
-    <hr>
-    <h3>&quot;ForceNoShadowCasting&quot; = &quot;True&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;ForceNoShadowCasting&quot; = &quot;True&quot;">&quot;ForceNoShadowCasting&quot; = &quot;True&quot;</h3>
     <p>强制关闭阴影投射。</p>
-    <hr>
-    <h3>&quot;ForceNoShadowCasting&quot; = &quot;False&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;ForceNoShadowCasting&quot; = &quot;False&quot;">&quot;ForceNoShadowCasting&quot; = &quot;False&quot;</h3>
     <p>不关闭阴影投射。</p>
-    <hr>
+    
+<hr>
     <h2>IgnoreProjector</h2>
-    <h3>IgnoreProjector</h3>
+    <h3 id="IgnoreProjector">IgnoreProjector</h3>
     <p>是否忽略Projector投影器的影响。</p>
-    <hr>
-    <h3>&quot;IgnoreProjector&quot; = &quot;True&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;IgnoreProjector&quot; = &quot;True&quot;">&quot;IgnoreProjector&quot; = &quot;True&quot;</h3>
     <p>不受投影器影响。</p>
-    <hr>
-    <h3>&quot;IgnoreProjector&quot; = &quot;False&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;IgnoreProjector&quot; = &quot;False&quot;">&quot;IgnoreProjector&quot; = &quot;False&quot;</h3>
     <p>受投影器影响。</p>
-    <hr>
+    
+<hr>
     <h2>CanUseSpriteAtlas</h2>
-    <h3>CanUseSpriteAtlas</h3>
+    <h3 id="CanUseSpriteAtlas">CanUseSpriteAtlas</h3>
     <p>是否可用于打包图集的精灵。</p>
-    <hr>
-    <h3>&quot;CanUseSpriteAtlas&quot; = &quot;True&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;CanUseSpriteAtlas&quot; = &quot;True&quot;">&quot;CanUseSpriteAtlas&quot; = &quot;True&quot;</h3>
     <p>支持精灵打包图集。</p>
-    <hr>
-    <h3>&quot;CanUseSpriteAtlas&quot; = &quot;False&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;CanUseSpriteAtlas&quot; = &quot;False&quot;">&quot;CanUseSpriteAtlas&quot; = &quot;False&quot;</h3>
     <p>不支持精灵打包图集。</p>
-    <hr>
+    
+<hr>
     <h2>PreviewType</h2>
-    <h3>PreviewType</h3>
+    <h3 id="PreviewType">PreviewType</h3>
     <p>定义材质面板中的预览的模型显示,默认不写或者不为Plane与Skybox时则为圆球。</p>
-    <hr>
-    <h3>&quot;PreviewType&quot; = &quot;Plane&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;PreviewType&quot; = &quot;Plane&quot;">&quot;PreviewType&quot; = &quot;Plane&quot;</h3>
     <p>平面。</p>
-    <hr>
-    <h3>&quot;PreviewType&quot; = &quot;Skybox&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;PreviewType&quot; = &quot;Skybox&quot;">&quot;PreviewType&quot; = &quot;Skybox&quot;</h3>
     <p>天空盒。</p>
-    <hr>
+    
+<hr>
     <h2>PerformanceChecks</h2>
-    <h3>PerformanceChecks</h3>
+    <h3 id="PerformanceChecks">PerformanceChecks</h3>
     <p>是否对shader在当前平台进行性能检测，并在材质面板进行警告提示</p>
-    <hr>
-    <h3>&quot;PerformanceChecks&quot; = &quot;True&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;PerformanceChecks&quot; = &quot;True&quot;">&quot;PerformanceChecks&quot; = &quot;True&quot;</h3>
     <p>开启性能检测提示</p>
-    <hr>
-    <h3>&quot;PerformanceChecks&quot; = &quot;False&quot;</h3>
+    
+<hr>
+    <h3 id="&quot;PerformanceChecks&quot; = &quot;False&quot;">&quot;PerformanceChecks&quot; = &quot;False&quot;</h3>
     <p>关闭性能检测提示</p>
-    <hr>
+    
+<hr>
     <h2>ForwardBase</h2>
-    <h3>ForwardBase</h3>
+    <h3 id="ForwardBase">ForwardBase</h3>
     <p>用于前向渲染路径，支持环境光、主像素光、球谐光照与烘焙光照。</p>
-    <hr>
-    <h3>ForwardAdd</h3>
+    
+<hr>
+    <h3 id="ForwardAdd">ForwardAdd</h3>
     <p>用于前向渲染路径，支持额外的逐像素光照，每盏灯一个Pass。</p>
-    <hr>
-    <h3>Deferred</h3>
+    
+<hr>
+    <h3 id="Deferred">Deferred</h3>
     <p>用于延迟渲染。</p>
-    <hr>
-    <h3>ShadowCaster</h3>
+    
+<hr>
+    <h3 id="ShadowCaster">ShadowCaster</h3>
     <p>深度渲染与Shadowmap。</p>
-    <hr>
-    <h3>MotionVectors</h3>
+    
+<hr>
+    <h3 id="MotionVectors">MotionVectors</h3>
     <p>运动矢量。</p>
-    <hr>
-    <h3>PrepassBase</h3>
+    
+<hr>
+    <h3 id="PrepassBase">PrepassBase</h3>
     <p>旧版延迟渲染，法线与高光处理。</p>
-    <hr>
-    <h3>PrepassFinal</h3>
+    
+<hr>
+    <h3 id="PrepassFinal">PrepassFinal</h3>
     <p>旧版延迟渲染，最终颜色。</p>
-    <hr>
-    <h3>Vertex</h3>
+    
+<hr>
+    <h3 id="Vertex">Vertex</h3>
     <p>旧版顶点渲染。</p>
-    <hr>
-    <h3>VertexLMRGBM</h3>
+    
+<hr>
+    <h3 id="VertexLMRGBM">VertexLMRGBM</h3>
     <p>旧版顶点渲染，支持烘焙光照。</p>
-    <hr>
-    <h3>VertexLM</h3>
+    
+<hr>
+    <h3 id="VertexLM">VertexLM</h3>
     <p>旧版顶点渲染，支持烘焙光照，解码为双LDR。</p>
-    <hr>
-    <h3>Always</h3>
+    
+<hr>
+    <h3 id="Always">Always</h3>
     <p>永远渲染。</p>
 
   </article>
 </body>
 
 </html>
+<hr>

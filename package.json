@@ -1,0 +1,14 @@
+{
+    "name": "utools-unity-shader-doc",
+    "version": "1.0.2",
+    "description": "unity shader 文档",
+    "scripts": {
+      "start": "node generateSetId.js"
+    },
+    "author": "海风",
+    "license": "MIT",
+    "dependencies": {
+      "highlight.js": "^9.16.2",
+      "marked": "^0.7.0"
+    }
+  }

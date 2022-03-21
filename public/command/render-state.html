@@ -11,7 +11,7 @@
 <body>
   <article class="markdown-body">
     <h2>Cull</h2>
-    <h3>Cull Back | Front | Off</h3>
+    <h3 id="Cull Back | Front | Off">Cull Back | Front | Off</h3>
     <p>背面剔除,默认值为Back。</p>
     <ul>
       <li>Back：表示剔除背面，也就是显示正面，这也是最常用的设置。</li>
@@ -49,8 +49,9 @@
       <li>Fail: 当模板测试（和深度测试）失败时,则根据（stencilOperation值）对模板缓冲值进行处理，默认值为keep.</li>
       <li>ZFail: 当模板测试通过而深度测试失败时,则根据（stencilOperation值）对模板缓冲值进行处理，默认值为keep.</li>
     </ul>
-    <hr>
-    <h3>Comp（比较操作）</h3>
+    
+<hr>
+    <h3 id="Comp（比较操作）">Comp（比较操作）</h3>
     <ul>
       <li>Less： 相当于“&lt;”操作，即仅当左边&lt;右边，模板测试通过，渲染像素.</li>
       <li>Greater： 相当于“&gt;”操作，即仅当左边&gt;右边，模板测试通过，渲染像素.</li>
@@ -61,8 +62,9 @@
       <li>Always： 不管公式两边为何值，模板测试总是通过，渲染像素.</li>
       <li>Never: 不管公式两边为何值，模板测试总是失败 ，像素被抛弃.</li>
     </ul>
-    <hr>
-    <h3>模版缓冲区的更新</h3>
+    
+<hr>
+    <h3 id="模版缓冲区的更新">模版缓冲区的更新</h3>
     <ul>
       <li>Keep： 保留当前缓冲中的内容，即stencilBufferValue不变.</li>
       <li>Zero： 将0写入缓冲，即stencilBufferValue值变为0.</li>
@@ -74,9 +76,10 @@
       <li>IncrWrap: 当前缓冲的值加1，如果缓冲值超过255了，那么变成0，（然后继续自增）.</li>
       <li>DecrWrap: 当前缓冲的值减1，如果缓冲值已经为0，那么变成255，（然后继续自减）.</li>
     </ul>
-    <hr>
+    
+<hr>
     <h2>深度缓冲</h2>
-    <h3>ZTest (Less | Greater | LEqual | GEqual | Equal | NotEqual | Never | Always)</h3>
+    <h3 id="ZTest (Less | Greater | LEqual | GEqual | Equal | NotEqual | Never | Always)">ZTest (Less | Greater | LEqual | GEqual | Equal | NotEqual | Never | Always)</h3>
     <p>深度测试，拿当前像素的深度值与深度缓冲中的深度值进行比较，默认值为LEqual。可通过在属性中添加枚举UnityEngine.Rendering.CompareFunction</p>
     <ul>
       <li>Less：小于，表示如果当前像素的深度值小于深度缓冲中的深度值，则通过，以下类同。</li>
@@ -88,18 +91,21 @@
       <li>Never: 永远不通过.</li>
       <li>Always：永远通过。</li>
     </ul>
-    <hr>
-    <h3>ZTest[unity_GUIZTestMode]</h3>
+    
+<hr>
+    <h3 id="ZTest[unity_GUIZTestMode]">ZTest[unity_GUIZTestMode]</h3>
     <p>unity_GUIZTestMode用于UI材质中，此值默认为LEqual,仅当UI中Canvas模式为Overlay时，值为Always.</p>
-    <hr>
-    <h3>ZWrite On | Off</h3>
+    
+<hr>
+    <h3 id="ZWrite On | Off">ZWrite On | Off</h3>
     <p>深度写入，默认值为On。</p>
     <ul>
       <li>On：向深度缓冲中写入深度值。</li>
       <li>Off：关闭深度写入。</li>
     </ul>
-    <hr>
-    <h3>Offset Factor, Units</h3>
+    
+<hr>
+    <h3 id="Offset Factor, Units">Offset Factor, Units</h3>
     <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML">
             <semantics>
               <mrow>
@@ -168,13 +174,15 @@
       <li>r：表示能产生在窗口坐标系的深度值中可分辨的差异的最小值，r是由具体实现OpenGL的平台指定的一个常量。</li>
     </ul>
     <p>结论：一个大于0的offset会把模型推远，一个小于0的offset会把模型拉近。</p>
-    <hr>
+    
+<hr>
     <h2>颜色遮罩</h2>
-    <h3>ColorMask RGB | A | 0 | R、G、B、A的任意组合</h3>
+    <h3 id="ColorMask RGB | A | 0 | R、G、B、A的任意组合">ColorMask RGB | A | 0 | R、G、B、A的任意组合</h3>
     <p>颜色遮罩，默认值为：RGBA，表示写入RGBA四个通道。</p>
-    <hr>
+    
+<hr>
     <h2>混合</h2>
-    <h3>说明</h3>
+    <h3 id="说明">说明</h3>
     <p>源颜色<em>SrcFactor + 目标颜色</em>DstFactor
       颜色混合，源颜色与目标颜色以给定的公式进行混合出最终的新颜色。</p>
     <ul>
@@ -182,23 +190,29 @@
       <li>目标颜色：已经存在颜色缓存中的颜色。默认值为Blend Off,即表示关闭混合。</li>
     </ul>
     <p>在混合时可以针对某个RT做混合，比如Blend 3 One One,就是对RenderTarget3做混合。</p>
-    <hr>
-    <h3>Blend SrcFactor DstFactor</h3>
+    
+<hr>
+    <h3 id="Blend SrcFactor DstFactor">Blend SrcFactor DstFactor</h3>
     <p>SrcFactor为源颜色因子，DstFactor为目标颜色因子，将两者按Op中指定的操作进行混合。</p>
-    <hr>
-    <h3>Blend SrcFactor DstFactor, SrcFactorA DstFactorA</h3>
+    
+<hr>
+    <h3 id="Blend SrcFactor DstFactor, SrcFactorA DstFactorA">Blend SrcFactor DstFactor, SrcFactorA DstFactorA</h3>
     <p>对RGB和A通道分别做混合操作。</p>
-    <hr>
-    <h3>BlendOp Op</h3>
+    
+<hr>
+    <h3 id="BlendOp Op">BlendOp Op</h3>
     <p>对RGB和A通道分别做混合操作。</p>
-    <hr>
-    <h3>BlendOp OpColor, OpAlpha</h3>
+    
+<hr>
+    <h3 id="BlendOp OpColor, OpAlpha">BlendOp OpColor, OpAlpha</h3>
     <p>对RGB和A通道分别指定混合运算符。</p>
-    <hr>
-    <h3>AlphaToMask On | Off</h3>
+    
+<hr>
+    <h3 id="AlphaToMask On | Off">AlphaToMask On | Off</h3>
     <p>当值为On时，在使用MSAA时，会根据像素结果将alpha值进行修改多重采样覆盖率，对植被和其他经过alpha测试的着色器非常有用。</p>
-    <hr>
-    <h3>Blend factors</h3>
+    
+<hr>
+    <h3 id="Blend factors">Blend factors</h3>
     <p>混合因子</p>
     <ul>
       <li>One：源或目标的完整值</li>
@@ -212,8 +226,9 @@
       <li>OneMinusDstColor：1-目标颜色得到的值</li>
       <li>OneMinusDstAlpha：1-目标Alpha得到的值</li>
     </ul>
-    <hr>
-    <h3>Blend Types</h3>
+    
+<hr>
+    <h3 id="Blend Types">Blend Types</h3>
     <p>常用的几种混合类型</p>
     <ul>
       <li>Blend SrcAlpha OneMinusSrcAlpha// Traditional transparency</li>
@@ -223,8 +238,9 @@
       <li>Blend DstColor Zero // Multiplicative</li>
       <li>Blend DstColor SrcColor // 2x Multiplicative</li>
     </ul>
-    <hr>
-    <h3>Blend operations</h3>
+    
+<hr>
+    <h3 id="Blend operations">Blend operations</h3>
     <p>混合操作的具体运算符</p>
     <ul>
       <li>Add：源+目标</li>
@@ -257,3 +273,4 @@
 </body>
 
 </html>
+<hr>
